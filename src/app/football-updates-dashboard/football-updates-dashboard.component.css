@@ -1,0 +1,72 @@
+.page {
+    background: beige;
+}
+
+.heading {
+    font-size: 18px;
+    font-weight: bold;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+table, td, th {
+    border : 1px solid #ddd;
+    text-align: left;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    background-color: #ffffff;
+}
+
+th, td {
+    padding: 15px;
+}
+
+.tabsSection {
+    text-align: center;
+    margin-left: 5%;
+}
+
+.tabsBackground {
+    padding: 1%;
+    margin: 1%;
+    border-radius: 50px;
+    font-size: 20px;
+    background-color: whitesmoke;
+}
+
+.tabsStyling {
+    padding: 5%;
+    margin: 5%;
+}
+
+.tabsStyling:hover {
+    cursor: pointer;
+}
+
+.pdr-15 {
+    padding-right: 15%;
+    cursor: pointer;
+}
+
+.navigationHeader {
+    display: flex;
+}
+
+ul {
+    list-style-type: none;
+}
+
+a {
+    color: #000000 !important
+}
+
+.activeMenu {
+    color: blue;
+}
