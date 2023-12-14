@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { updatesHeader } from '../types/football-updates.type';
+import { CountryList, updatesHeader } from '../types/football-updates.type';
 import { MainService } from '../services/main.service';
 import { Router } from '@angular/router';
 
@@ -11,42 +11,62 @@ import { Router } from '@angular/router';
 export class FootballUpdatesDashboardComponent {
   footballTeamsData: Array<updatesHeader> = [];
   countries = [
-    {id: 'englandSelect', name:'England'},
-    {id: 'spainSelect', name:'Spain'},
-    {id: 'germanySelect', name:'Germany'},
-    {id: 'franceSelect', name:'France'},
-    {id: 'italySelect', name:'Italy'}
+    { id: 'englandSelect', name: 'England', code:'', flag:'' },
+    { id: 'spainSelect', name: 'Spain', code:'', flag:''  },
+    { id: 'germanySelect', name: 'Germany', code:'', flag:''  },
+    { id: 'franceSelect', name: 'France', code:'', flag:''  },
+    { id: 'italySelect', name: 'Italy', code:'', flag:''  }
   ];
+  countryList: Array<CountryList> = [];
 
-  constructor(private route: Router, private mainService:MainService) { }
+  constructor(private route: Router, private mainService: MainService) { }
 
   ngOnInit(): void {
     this.footballTeamsData = [
-      {series: 1, logo: '', name: 'Manchester', games: 6, won : 3, lost: 2, draw: 1, goalDifference: 1, points: 12},
-      {series: 1, logo: '', name: 'Manchester', games: 6, won : 3, lost: 2, draw: 1, goalDifference: 1, points: 12},
-      {series: 1, logo: '', name: 'Manchester', games: 6, won : 3, lost: 2, draw: 1, goalDifference: 1, points: 12},
-      {series: 1, logo: '', name: 'Manchester', games: 6, won : 3, lost: 2, draw: 1, goalDifference: 1, points: 12},
-      {series: 1, logo: '', name: 'Manchester', games: 6, won : 3, lost: 2, draw: 1, goalDifference: 1, points: 12},
-      {series: 1, logo: '', name: 'Manchester', games: 6, won : 3, lost: 2, draw: 1, goalDifference: 1, points: 12},
-      {series: 1, logo: '', name: 'Manchester', games: 6, won : 3, lost: 2, draw: 1, goalDifference: 1, points: 12},
-      {series: 1, logo: '', name: 'Manchester', games: 6, won : 3, lost: 2, draw: 1, goalDifference: 1, points: 12},
-      {series: 1, logo: '', name: 'Manchester', games: 6, won : 3, lost: 2, draw: 1, goalDifference: 1, points: 12},
-      {series: 1, logo: '', name: 'Manchester', games: 6, won : 3, lost: 2, draw: 1, goalDifference: 1, points: 12}
+      { series: 1, logo: '', name: 'Manchester', games: 6, won: 3, lost: 2, draw: 1, goalDifference: 1, points: 12 },
+      { series: 1, logo: '', name: 'Manchester', games: 6, won: 3, lost: 2, draw: 1, goalDifference: 1, points: 12 },
+      { series: 1, logo: '', name: 'Manchester', games: 6, won: 3, lost: 2, draw: 1, goalDifference: 1, points: 12 },
+      { series: 1, logo: '', name: 'Manchester', games: 6, won: 3, lost: 2, draw: 1, goalDifference: 1, points: 12 },
+      { series: 1, logo: '', name: 'Manchester', games: 6, won: 3, lost: 2, draw: 1, goalDifference: 1, points: 12 },
+      { series: 1, logo: '', name: 'Manchester', games: 6, won: 3, lost: 2, draw: 1, goalDifference: 1, points: 12 },
+      { series: 1, logo: '', name: 'Manchester', games: 6, won: 3, lost: 2, draw: 1, goalDifference: 1, points: 12 },
+      { series: 1, logo: '', name: 'Manchester', games: 6, won: 3, lost: 2, draw: 1, goalDifference: 1, points: 12 },
+      { series: 1, logo: '', name: 'Manchester', games: 6, won: 3, lost: 2, draw: 1, goalDifference: 1, points: 12 },
+      { series: 1, logo: '', name: 'Manchester', games: 6, won: 3, lost: 2, draw: 1, goalDifference: 1, points: 12 }
     ]
+
+    this.mainService.getCountries().then(response => {
+      response.json().then((data: { response: any[]; }) => {
+        data.response.forEach(item => {
+          if (item.name == 'England' || item.name == 'Spain' || item.name == 'Germany' || item.name == 'France' || item.name == 'Italy') {
+            this.countryList.push(item)
+          }
+        })
+      })
+    })
+    .catch(error => console.log('Error while fetching:', error))
+
+    
   }
 
   /**
    * selected country data function
    */
-  countrySelect(country:any) {
+  countrySelect(country: CountryList) {
     console.log(country);
+    this.mainService.getLeagues().then(response => {
+      response.json().then((res: any) => {
+        console.log(res)
+    }) 
+  })
+  .catch(error => console.log('Error while fetching:', error))
   }
 
 
   /**
    * team click function to get results
    */
-  teamClick(team:object) {
+  teamClick(team: object) {
     this.route.navigate(['/gameResults'])
   }
 }

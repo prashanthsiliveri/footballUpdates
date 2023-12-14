@@ -7,10 +7,20 @@
 
 
     <!-- CODE FOR COUNTRY LIST -->
+    <!-- <div class="row tabsBackground">
+        <ul class="navigationHeader tabsSection">
+            <li class="nav-item pdr-80" *ngFor="let item of countryList" (click)="countrySelect(item)">
+                <a><span [id]="item.name+'Select'">{{item.name}}</span></a>
+            </li>
+        </ul>
+    </div> -->
+
+
+    <!-- Temporary code -->
     <div class="row tabsBackground">
         <ul class="navigationHeader tabsSection">
-            <li class="nav-item pdr-15" *ngFor="let item of countries" (click)="countrySelect(item)">
-                <a><span [ngClass]="{'activeMenu' : true}" id="{{item.id}}">{{item.name}}</span></a>
+            <li class="nav-item pdr-80" *ngFor="let item of countries" (click)="countrySelect(item)">
+                <a><span [id]="item.name+'Select'">{{item.name}}</span></a>
             </li>
         </ul>
     </div>

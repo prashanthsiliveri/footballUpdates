@@ -14,3 +14,9 @@ export interface teamsTableData {
     key?: string;
     value?: string;
 }
+
+export interface CountryList {
+    name: string;
+    code: string;
+    flag: string;
+}
